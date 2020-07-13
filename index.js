@@ -51,8 +51,12 @@ todoRoutes.route('/:id').get(function (req, res) {
 });
 
 todoRoutes.route('/add').post(function (req, res) {
-    let todo = new Todo(req.body);
-    console.log(todo);
+    let todo = new Todo({title: req.body.title});
+    console.log(req.body.title);
+    
+    console.log(todo.title);
+    console.log(todo.completed);
+    console.log(todo.id);
     
     todo.save()
          .then((todo) => {
