@@ -43,46 +43,41 @@ todoRoutes.route('/').get(function (req, res) {
     });
 });
 
-todoRoutes.route('/').post(function (req, res) {
-    let todo = new Todo({title: req.body.title});
-    todo.save().then(todo => res.json(todo))
-})
-
-
 // todoRoutes.route('/').post(function (req, res) {
-    
 //     let todo = new Todo({title: req.body.title});
-    
-//     // console.log([todo.title, todo.completed, todo.id]);
+//     todo.save().then(todo => res.send(todo))
+// })
 
-//     todo.save()
-//         .then((todo) => {
-//             res.status(200).json({ 'Todo': 'todo added successfully' });
-//         })
-//         .catch(err => {
-//             res.status(400).send('adding new Todo failed');
-//         });
-// });
+
+todoRoutes.route('/').post(function (req, res) {
+    console.log(req.body);
+    let todo = Todo.create({title: req.body.data.title})
+    
+    // console.log([todo.title, todo.completed, todo.id]);
+        .then((todo) => {
+            console.log(todo);
+            res.status(200).json(todo);
+        })
+        .catch(err => {
+            res.status(400).send('adding new Todo failed');
+        });
+});
 
 todoRoutes.route('/:id').delete(function(req, res) {
     Todo.findByIdAndDelete (req.params.id)
     .then(() => res.json({remove:true}))
 })
 
-// todoRoutes.route('/:id').patch(function(req, res) {
-//     Todo.findByIdAndUpdate(req.params.id, {...req.body})
-//     .then((todo) => res.send('success'))
-//     .catch((error) => res.send(error))
-// })
+todoRoutes.route('/:id').patch(function(req, res) {
+    console.log(req.body);
+    Todo.findByIdAndUpdate(req.params.id, {...req.body.data})
+    .then((todo) => res.send('success'))
+    .catch((error) => res.send(error))
+})
 
 
 // todoRoutes.route('/:id').patch(function(req, res) {
 //     Todo.findByIdAndUpdate(req.params.id, {title: value} )
 //     .then(() => res.json({title: req.body.title}))
     
-// })
-
-// app.delete('/:id', (req, res) => {
-//     Todo.findByIdAndDelete(req.params.id)
-//     .then(() => res.json({remove:true}))
 // })
