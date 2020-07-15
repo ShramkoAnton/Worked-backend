@@ -4,9 +4,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index",
-    "dev": "nodemon index.js",
-    "client": "npm run start --prefix client",
-    "dev2": "concurrently \"npm run dev\" \"npm run client\""
+    "dev": "nodemon index.js"
   },
   "author": "",
   "license": "ISC",
